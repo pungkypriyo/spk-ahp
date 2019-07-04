@@ -12,6 +12,9 @@ class CoreModules extends CI_Controller {
       // Setting up timezone :: Never forget this things!
       date_default_timezone_set("Asia/Jakarta");
 
+      // Load general models
+      $this->load->model('AppModel','App');
+
       // Session Parse into Global Vars
       $this->AuthSession = $this->session->userdata('AuthSession');
       $this->AuthId = $this->AuthSession['AuthId'];

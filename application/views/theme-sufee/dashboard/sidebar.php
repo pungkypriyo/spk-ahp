@@ -14,10 +14,10 @@
             </li>
             <h3 class="menu-title">Master</h3><!-- /.menu-title -->
             <li>
-               <a href="#"> <i class="menu-icon ti-files"></i>Data Kain </a>
+               <a href="<?=site_url('kain');?>"> <i class="menu-icon ti-files"></i>Data Kain </a>
             </li>
             <li>
-               <a href="user/data-kain.php"> <i class="menu-icon fa fa-table"></i>Perhitungan </a>
+               <a href="<?=site_url('acuan');?>"> <i class="menu-icon fa fa-table"></i>Data Bobot Acuan </a>
             </li>
          </ul>
    </div><!-- /.navbar-collapse -->

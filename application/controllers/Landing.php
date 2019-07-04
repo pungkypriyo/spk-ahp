@@ -31,5 +31,22 @@ class Landing extends CI_Controller {
       */
       $data['LoadScripts'] = _LoadJS( array('') );
 		$this->template->DisplayView('landing','app_landing/landing.index',$data);
-	}
+   }
+   
+   public function Kain(){
+      $data['LoadScripts'] = _LoadJS( array('landing/kain') );
+      $data['_Breadcrumb'] = _Breadcrumb($this->uri->segment_array());
+		$this->template->DisplayView('landing','app_landing/landing.kain',$data);
+   }
+
+   public function Ahp(){
+      $data['_Breadcrumb'] = _Breadcrumb($this->uri->segment_array());
+		$this->template->DisplayView('landing','app_landing/landing.ahp',$data);
+   }
+
+   public function Ahp2(){
+      $data['LoadScripts'] = _LoadJS( array('') );
+      $data['_Breadcrumb'] = _Breadcrumb($this->uri->segment_array());
+		$this->template->DisplayView('landing','app_landing/landing.ahp2',$data);
+   }
 }
