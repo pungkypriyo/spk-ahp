@@ -23,16 +23,8 @@
                         </tr>
                      </thead>
                      <tbody>
-                     <tr>
-                           <td>ID</td>
-                           <td>Nama</td>
-                           <td>Jenis Bahan</td>
-                           <td>Tipe Benang</td>
-                           <td>Corak</td>
-                           <td>Kualitas Serap</td>
-                           <td>Grade</td>
-                           <td>Kat. Pengguna</td>
-                           <td>Gambar</td>
+                        <tr>
+                           
                         </tr>
                      </tbody>
                   </table>

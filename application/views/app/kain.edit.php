@@ -1,62 +1,53 @@
 <?=$_Breadcrumb;?>
 
+<!-- <?php var_dump($Kain);?> -->
+
+
 <div class="content mt-2">            
    <div class=" col-lg-12">
-         <div class="card">
-            <div class="card-header">
-               <strong>Tambah Data Motif Kain</strong>
-            </div>
-            <div class="card-body card-block">
+      <div class="card">
+         <div class="card-header">
+            <strong>Tambah Data Motif Kain</strong>
+         </div>
+         <div class="card-body card-block">
                <form action="<?=site_url('kain/add');?>" method="post" enctype="multipart/form-data" class="form-horizontal">
+                  <input type="hidden" id="idk" name="idk" value="<?=$Kain->idk;?>">
                   <div class="row form-group">
                      <div class="col col-md-2"><label for="id_kain" class=" form-control-label">ID Motif</label></div>
                      <div class="col-12 col-md-3">
-                        <input type="text" id="id_kain" name="id_kain" class="form-control" readonly>
+                        <input type="text" id="id_kain" name="id_kain" class="form-control" value="<?=$Kain->id_kain;?>" readonly>
                      </div>
                   </div>
                   <div class="row form-group">
                      <div class="col col-md-2"><label for="nm_kain" class=" form-control-label">Nama Motif</label></div>
-                     <div class="col-12 col-md-9"><input type="text" id="nm_kain" name="nm_kain" placeholder="Text" class="form-control"></div>
+                     <div class="col-12 col-md-9"><input type="text" id="nm_kain" name="nm_kain" value="<?=$Kain->nm_kain;?>" class="form-control"></div>
                   </div>
                   <div class="row form-group">
                      <div class="col col-md-2"><label for="jenis_bahan" class=" form-control-label">Jenis Bahan</label></div>
                      <div class="col-12 col-md-3">
-                        <select name="jenis_bahan" id="jenis_bahan" class="form-control">
-                           <option value="0">- Pilih Jenis Bahan -</option>
-                           <option value="combed">Combed</option>
-                           <option value="bamboo">Bamboo</option>
-                           <option value="carded">Carded</option>
-                           <option value="tc">TC (Teteron Cotton)</option>
-                           <option value="cvc">CVC (Chief Value Cotton)</option>
-                           <option value="hyget">Hyget</option>
-                        </select>
+                        <?php
+                           $optionBahan = array('combed','bamboo','carded','TC','CVC','hyget');
+                           echo Static_SelectOptions('jenis_bahan','Pilih Jenis Bahan',$Kain->jenis_bahan,$optionBahan);
+                        ?>
                      </div>
                   <!-- </div>
                   <div class="row form-group"> -->
                      <div class="col col-md-2"><label for="tipe_benang" class=" form-control-label">Tipe Benang</label></div>
                      <div class="col-12 col-md-3">
-                        <select name="tipe_benang" id="tipe_benang" class="form-control">
-                           <option value="0">- Pilih Tipe Benang -</option>
-                           <option value="20s">20s</option>
-                           <option value="23s">23s</option>
-                           <option value="24s">24s</option>
-                           <option value="30s">30s</option>
-                           <option value="40s">40s</option>
-                        </select>
+                        <?php
+                           $optionBenang = array('20s','23s','24s','30s','40s');
+                           echo Static_SelectOptions('tipe_benang','Pilih Tipe Benang',$Kain->tipe_benang,$optionBenang);
+                        ?>
                      </div>
                   </div>
                   <div class="row form-group">
                      <div class="col col-md-2"><label for="corak_kain" class=" form-control-label">Corak Kain</label></div>
                      <div class="col-12 col-md-3">
-                        <select name="corak_kain" id="corak_kain" class="form-control">
-                           <option value="0">- Pilih Corak Kain -</option>
-                           <option value="polos">Polos</option>
-                           <option value="mamboo">Mamboo</option>
-                           <option value="wash">Wash</option>
-                           <option value="stripes">Stripes</option>
-                           <option value="print">Print</option>
-                        </select>
-                     </div>
+                        <?php
+                           $optionCorak = array('polos','mamboo','wash','stripes','print');
+                           echo Static_SelectOptions('corak_kain','Pilih Corak Kain',$Kain->corak_kain,$optionCorak);
+                        ?>
+                    </div>
                   <!-- </div>
                   <div class="row form-group"> -->
                      <div class="col col-md-2"><label class=" form-control-label"> Daya Serap</label></div>
@@ -83,13 +74,10 @@
                   <div class="row form-group">
                      <div class="col col-md-2"><label for="grade_kain" class=" form-control-label">Grade Kain</label></div>
                      <div class="col-12 col-md-9">
-                        <select name="grade_kain" id="grade_kain" class="form-control">
-                           <option value="0">- Pilih Grade Kain -</option>
-                           <option value="A">A</option>
-                           <option value="B">B</option>
-                           <option value="C">C</option>
-                           <option value="D">D</option>
-                        </select>
+                        <?php
+                           $optionGrade = array('a','b','c','d');
+                           echo Static_SelectOptions('grade_kain','Pilih Grade Kain',$Kain->grade_kain,$optionGrade);
+                        ?>
                      </div>
                   </div>
                   <div class="row form-group">
