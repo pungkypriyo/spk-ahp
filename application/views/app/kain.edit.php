@@ -75,7 +75,7 @@
                      <div class="col col-md-2"><label for="grade_kain" class=" form-control-label">Grade Kain</label></div>
                      <div class="col-12 col-md-9">
                         <?php
-                           $optionGrade = array('a','b','c','d');
+                           $optionGrade = array('A','B','C','D');
                            echo Static_SelectOptions('grade_kain','Pilih Grade Kain',$Kain->grade_kain,$optionGrade);
                         ?>
                      </div>
