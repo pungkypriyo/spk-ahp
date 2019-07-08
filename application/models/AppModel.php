@@ -26,5 +26,7 @@ class AppModel extends CI_Model {
         return $data->row();
      }
    }
+
+
    
 }
