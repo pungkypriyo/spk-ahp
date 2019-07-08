@@ -7,6 +7,7 @@ class Landing extends CI_Controller {
    public function __construct()
    {
       parent::__construct();
+      $this->load->model('KainModel','Mod');
       //Do your magic here
    }
    
@@ -18,6 +19,7 @@ class Landing extends CI_Controller {
          function DisplayView : 
             DisplayView( $LayoutType = null, $FileContentPath = null , $data=null ) 
       */
+      
       $data['LoadScripts'] = _LoadJS(array('landing'));
 		$this->template->DisplayView('landing','app_landing/landing.index',$data);
 	}
@@ -34,12 +36,14 @@ class Landing extends CI_Controller {
    }
    
    public function Kain(){
+      $data['ListKain'] = $this->Mod->getdata();
       $data['LoadScripts'] = _LoadJS( array('landing/kain') );
       $data['_Breadcrumb'] = _Breadcrumb($this->uri->segment_array());
 		$this->template->DisplayView('landing','app_landing/landing.kain',$data);
    }
 
    public function Ahp(){
+      $data['ListKain'] = $this->Mod->getdata();
       $data['_Breadcrumb'] = _Breadcrumb($this->uri->segment_array());
 		$this->template->DisplayView('landing','app_landing/landing.ahp',$data);
    }

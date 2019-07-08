@@ -82,7 +82,7 @@
                   </div>
                   <div class="row form-group">
                      <div class="col col-md-2"><label for="grade_kain" class=" form-control-label">Grade Kain</label></div>
-                     <div class="col-12 col-md-9">
+                     <div class="col-12 col-md-3">
                         <select name="grade_kain" id="grade_kain" class="form-control">
                            <option value="0">- Pilih Grade Kain -</option>
                            <option value="A">A</option>
@@ -91,15 +91,15 @@
                            <option value="D">D</option>
                         </select>
                      </div>
-                  </div>
-                  <div class="row form-group">
+                  <!-- </div>
+                  <div class="row form-group"> -->
                      <div class="col col-md-2"><label class=" form-control-label">Kategori Pengguna</label></div>
-                        <div class="col col-md-9">
-                           <div class="form-check">
+                        <div class="col col-md-3">
+                           <div class="form-check-inline form-check">
                                  <div class="radio">
                                     <label for="pengguna_pria" class="form-check-label ">
                                        <input type="radio" id="pengguna_pria" name="kategori_pengguna" value="pria" class="form-check-input"> Pria
-                                    </label>
+                                    </label>&nbsp;&nbsp;
                                  </div>
                                  <div class="radio">
                                     <label for="pengguna_wanita" class="form-check-label ">

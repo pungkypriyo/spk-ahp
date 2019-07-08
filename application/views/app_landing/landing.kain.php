@@ -24,7 +24,19 @@
                      </thead>
                      <tbody>
                         <tr>
-                           
+                        <?php foreach($ListKain as $u){ ?>
+                           <tr>
+                              <td><?= $u->id_kain?></td>
+                              <td><?php echo $u->nm_kain?></td>
+                              <td><?php echo $u->jenis_bahan?></td>
+                              <td><?php echo $u->tipe_benang?></td>
+                              <td><?php echo $u->corak_kain?></td>
+                              <td><?php echo $u->kualitas_serap?></td>
+                              <td><?php echo $u->grade_kain?></td>
+                              <td><?php echo $u->kategori_pengguna?></td>
+                              <td><?php echo $u->gambar?></td>
+                           </tr>
+                           <?php } ?>
                         </tr>
                      </tbody>
                   </table>

@@ -4,13 +4,13 @@ class KainModel extends CI_Model {
    var $table = 'data_kain';
    var $pk = 'idk';
 
-   function query(){
+   public function query(){
       // $this->db->select('idk,id_kain,nm_kain')
       $this->db->select('*')
                ->from($this->table);
    }
 
-   function getKain($id){
+   public function getKain($id){
      $this->query();
      $this->db->where($this->pk,$id);
      $data = $this->db->get(); 
@@ -22,7 +22,7 @@ class KainModel extends CI_Model {
 
    }
    
-   function getdata(){
+   public function getdata(){
       // fungsi  query
       $this->query();
       $data = $this->db->get(); 

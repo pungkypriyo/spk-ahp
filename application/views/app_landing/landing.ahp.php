@@ -25,16 +25,22 @@
                      </thead>
                      <tbody>
                      <tr>
-                           <td>ID</td>
-                           <td>Nama</td>
-                           <td>Jenis Bahan</td>
-                           <td>Tipe Benang</td>
-                           <td>Corak</td>
-                           <td>Kualitas Serap</td>
-                           <td>Grade</td>
-                           <td>Kat. Pengguna</td>
-                           <td>Gambar</td>
-                           <td></td>
+                        <?php foreach($ListKain as $u){ ?>
+                           <tr>
+                              <td><?= $u->id_kain?></td>
+                              <td><?php echo $u->nm_kain?></td>
+                              <td><?php echo $u->jenis_bahan?></td>
+                              <td><?php echo $u->tipe_benang?></td>
+                              <td><?php echo $u->corak_kain?></td>
+                              <td><?php echo $u->kualitas_serap?></td>
+                              <td><?php echo $u->grade_kain?></td>
+                              <td><?php echo $u->kategori_pengguna?></td>
+                              <td><?php echo $u->gambar?></td>
+                              <td>
+                                 <input type="checkbox" id="checkbox1" name="checkbox1" value="option1" class="form-check-input">
+                              </td>
+                           </tr>
+                           <?php } ?>
                         </tr>
                      </tbody>
                   </table>

@@ -52,4 +52,22 @@ class Kain extends CoreModules {
       $data['_Breadcrumb'] = _Breadcrumb($this->uri->segment_array());
 		$this->template->DisplayView('dashboard','app/kain.edit',$data);
    }
+
+   function edit(){
+      
+      $inputs=$this->input->post();
+      $this->db->where('idk',$inputs['idk']);
+      $update = $this->db->update('data_kain',$inputs);
+      
+      echo $this->db->last_query();
+      
+      // if($update == true){
+      //    echo 'testBerhasil';
+         
+      // }else{
+      //    echo $this->db->_error_message();
+      // }
+      // var_dump($inputs);
+      
+   }
 }

@@ -10,7 +10,7 @@
             <strong>Tambah Data Motif Kain</strong>
          </div>
          <div class="card-body card-block">
-               <form action="<?=site_url('kain/add');?>" method="post" enctype="multipart/form-data" class="form-horizontal">
+               <form action="<?=site_url('kain/edit');?>" method="post" enctype="multipart/form-data" class="form-horizontal">
                   <input type="hidden" id="idk" name="idk" value="<?=$Kain->idk;?>">
                   <div class="row form-group">
                      <div class="col col-md-2"><label for="id_kain" class=" form-control-label">ID Motif</label></div>
@@ -53,38 +53,30 @@
                      <div class="col col-md-2"><label class=" form-control-label"> Daya Serap</label></div>
                         <div class="col col-md-4">
                            <div class="form-check-inline form-check">
-                                 <!-- <div class="radio"> -->
-                                    <label for="serap_rendah" class="form-check-label ">
-                                       <input type="radio" id="serap_rendah" name="kualitas_serap" value="rendah" class="form-check-input"> Rendah
-                                    </label>&nbsp;&nbsp;&nbsp;
-                                 <!-- </div> -->
-                                 <!-- <div class="radio"> -->
-                                    <label for="serap_sedang" class="form-check-label ">
-                                       <input type="radio" id="serap_sedang" name="kualitas_serap" value="sedang" class="form-check-input"> Sedang
-                                    </label>&nbsp;&nbsp;&nbsp;
-                                 <!-- </div> -->
-                                 <!-- <div class="radio"> -->
-                                    <label for="serap_tinggi" class="form-check-label ">
-                                       <input type="radio" id="serap_tinggi" name="kualitas_serap" value="tinggi" class="form-check-input"> Tinggi
-                                    </label>
-                                 <!-- </div> -->
+                           <?php
+                              $optionSerap = array('rendah','sedang','tinggi');
+                              echo Static_SelectRadios('kualitas_serap',$Kain->kualitas_serap,$optionSerap);
+                           ?>
                            </div>
                         </div>
                   </div>
                   <div class="row form-group">
                      <div class="col col-md-2"><label for="grade_kain" class=" form-control-label">Grade Kain</label></div>
-                     <div class="col-12 col-md-9">
+                     <div class="col-12 col-md-3">
                         <?php
                            $optionGrade = array('A','B','C','D');
                            echo Static_SelectOptions('grade_kain','Pilih Grade Kain',$Kain->grade_kain,$optionGrade);
                         ?>
                      </div>
-                  </div>
-                  <div class="row form-group">
+                  <!-- </div>
+                  <div class="row form-group"> -->
                      <div class="col col-md-2"><label class=" form-control-label">Kategori Pengguna</label></div>
-                        <div class="col col-md-9">
-                           <div class="form-check">
-                                 <div class="radio">
+                        <div class="col col-md-3">
+                           <div class="form-check-inline form-check">
+                              <?php
+                                 $optionPengguna = array('pria','wanita');
+                                 echo Static_SelectRadios('kategori_pengguna',$Kain->kategori_pengguna,$optionPengguna);
+                              ?>   <!-- <div class="radio">
                                     <label for="pengguna_pria" class="form-check-label ">
                                        <input type="radio" id="pengguna_pria" name="kategori_pengguna" value="pria" class="form-check-input"> Pria
                                     </label>
@@ -93,7 +85,7 @@
                                     <label for="pengguna_wanita" class="form-check-label ">
                                        <input type="radio" id="pengguna_wanita" name="kategori_pengguna" value="wanita" class="form-check-input"> Wanita
                                     </label>
-                                 </div>
+                                 </div> -->
                            </div>
                         </div>
                   </div>
