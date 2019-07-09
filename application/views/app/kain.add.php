@@ -7,6 +7,11 @@
                <strong>Tambah Data Motif Kain</strong>
             </div>
             <div class="card-body card-block">
+               <?php
+                  if($this->session->flashdata('message')){
+                     echo $this->session->flashdata('message');
+                  }
+               ?>
                <form action="<?=site_url('kain/add');?>" method="post" enctype="multipart/form-data" class="form-horizontal">
                   <div class="row form-group">
                      <div class="col col-md-2"><label for="id_kain" class=" form-control-label">ID Motif</label></div>
@@ -16,7 +21,7 @@
                   </div>
                   <div class="row form-group">
                      <div class="col col-md-2"><label for="nm_kain" class=" form-control-label">Nama Motif</label></div>
-                     <div class="col-12 col-md-9"><input type="text" id="nm_kain" name="nm_kain" placeholder="Text" class="form-control"></div>
+                     <div class="col-12 col-md-9"><input type="text" id="nm_kain" name="nm_kain" placeholder="Ketikkan nama motif kain..." class="form-control"></div>
                   </div>
                   <div class="row form-group">
                      <div class="col col-md-2"><label for="jenis_bahan" class=" form-control-label">Jenis Bahan</label></div>
@@ -116,7 +121,7 @@
                </form>
                 </div>
                 <div class="card-footer">
-                    <button type="submit" id="submit-form" class="btn btn-primary btn-sm">
+                    <button type="submit" id="btn-submit" class="btn btn-primary btn-sm">
                         <i class="fa fa-dot-circle-o"></i> Simpan Data
                     </button>
                     <button type="reset" class="btn btn-danger btn-sm">

@@ -17,7 +17,11 @@
    <?=$CSS_VENDOR;?>
    <!-- MAIN CSS -->
    <?=$CSS_MAIN;?>
-
+   <style>
+      body {
+         overflow:hidden
+      }
+   </style>
 </head>
 
 <body>
