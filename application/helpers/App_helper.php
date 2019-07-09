@@ -102,3 +102,16 @@ if(!function_exists('_Breadcrumb')){
       return $_HTML;
    }
 }
+
+/* 
+| Datatables - Generate Images Display
+| App_helper: _DtImages($data)
+|---------------------------------------
+*/
+if(!function_exists('_DtImages')){
+   function _DtImages($img_path,$alt=null){
+      $alt = (empty($alt) ? $img_path : $alt);
+      $_HTML ='<img class="card-img-top" src="'.base_url("images/".$img_path).'" alt="'.$alt.'">';
+      return $_HTML;
+   }
+}
