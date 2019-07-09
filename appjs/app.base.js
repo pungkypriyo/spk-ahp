@@ -8,6 +8,8 @@ var base_url = function() {
       var url = location.origin + '/2019/sarmansys/'; // domain
    } else if (location.host == 'spk-ahp.dev') {
       var url = location.origin + '/'; // domain
+   } else if (location.host == 'spk-ahp-dev.dev') {
+      var url = location.origin + '/'; // domain
    } else {
       var url = location.origin + '/'; // domain
    }

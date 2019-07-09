@@ -1,3 +1,3 @@
 $(document).ready(function(){
-   alert('Halo selamat mencoba ninda!!!!!');
+   console.log('Halo selamat mencoba ninda!!!!!');
 });
