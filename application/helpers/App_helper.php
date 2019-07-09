@@ -111,7 +111,7 @@ if(!function_exists('_Breadcrumb')){
 if(!function_exists('_DtImages')){
    function _DtImages($img_path,$alt=null){
       $alt = (empty($alt) ? $img_path : $alt);
-      $_HTML ='<img class="card-img-top" src="'.base_url("images/".$img_path).'" alt="'.$alt.'">';
+      $_HTML ='<img class="card-img-top" src="'.base_url("images/".$img_path).'" alt="'.$alt.'" width="300px">';
       return $_HTML;
    }
 }

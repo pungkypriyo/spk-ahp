@@ -3,7 +3,7 @@
 class KainModel extends CI_Model {
    var $table = 'data_kain';
    var $table_as = 'data_kain as a';
-   var $pk = 'idk';
+   var $pk = 'id_kain';
    
 
    // Main Query for define all data to show

@@ -5,12 +5,19 @@
 
 <div class="content mt-2">            
    <div class=" col-lg-12">
+      <?php
+         if($this->session->flashdata('msg')){
+            echo $this->session->flashdata('msg');
+         }
+      ?>
+   </div>
+   <div class=" col-lg-12">
       <div class="card">
          <div class="card-header">
-            <strong>Tambah Data Motif Kain</strong>
+            <strong>Edit Data Motif Kain</strong>
          </div>
          <div class="card-body card-block">
-               <form action="<?=site_url('kain/edit');?>" method="post" enctype="multipart/form-data" class="form-horizontal">
+               <form action="<?=site_url('kain/edit/'.$this->uri->segment(3));?>" method="post" enctype="multipart/form-data" class="form-horizontal">
                   <input type="hidden" id="idk" name="idk" value="<?=$Kain->idk;?>">
                   <div class="row form-group">
                      <div class="col col-md-2"><label for="id_kain" class=" form-control-label">ID Motif</label></div>
@@ -76,16 +83,7 @@
                               <?php
                                  $optionPengguna = array('pria','wanita');
                                  echo Static_SelectRadios('kategori_pengguna',$Kain->kategori_pengguna,$optionPengguna);
-                              ?>   <!-- <div class="radio">
-                                    <label for="pengguna_pria" class="form-check-label ">
-                                       <input type="radio" id="pengguna_pria" name="kategori_pengguna" value="pria" class="form-check-input"> Pria
-                                    </label>
-                                 </div>
-                                 <div class="radio">
-                                    <label for="pengguna_wanita" class="form-check-label ">
-                                       <input type="radio" id="pengguna_wanita" name="kategori_pengguna" value="wanita" class="form-check-input"> Wanita
-                                    </label>
-                                 </div> -->
+                              ?>
                            </div>
                         </div>
                   </div>
@@ -93,8 +91,11 @@
                      <div class="col col-md-2"><label for="file-input" class=" form-control-label">Detail Motif</label></div>
                      <div class="col-12 col-md-3"><input type="file" id="file-input" name="gambar" class="form-control-file"></div>
                   
-                     <div class="col col-md-2"><label for="file-input" class=" form-control-label">Preview</label></div>
+                     <div class="col col-md-2">
+                        <label class=" form-control-label">Preview</label>
+                     </div>
                      <div class="col-12 col-md-4">
+                        <!-- <input type="hidden" name="currImg" value="<?=$Kain->gambar;?>"> -->
                         <img src="<?=base_url('images/kain/'.$Kain->gambar);?>" width="40%"/>
                      </div>
                   </div>

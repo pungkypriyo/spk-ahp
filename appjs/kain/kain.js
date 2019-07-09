@@ -24,13 +24,17 @@
          { "data": ['serap'] },
          { "data": ['grade'] },
          { "data": ['pengguna'] },
-         // { "data": ['gambar'] },
+         { "data": ['gambar'] },
          { "data": ['act'] }
       ],
       "columnDefs": [
          {
             "targets" : [8],
-            "orderable" :false
+            "visible" :false
+         },
+         {
+            "targets": [9],
+            "orderable": false
          }
       ],
       "iDisplayLength": 10,
@@ -47,6 +51,30 @@
    var btnTambah = $('button#btn-add');
    btnTambah.click(function(e){
       window.location.href = base_url() + 'kain/tambahkain';
+   });
+   
+   dt_table.on('click', 'a#btn-detil', function (e) {
+      var url = $(this).attr('href');
+      var id = url.substring(url.length - 3, url.length);
+      var data = oTable.row($(this).parents('tr')).data();
+
+      var img = $('#datamodal').find('#gambar-kain');
+      img.html('');
+      img.html(data['gambar']);
+      e.preventDefault();
+   });
+
+   dt_table.on('click', 'a#btn-hapus', function (e) {
+      var url = $(this).attr('href');
+      var id = url.substring(url.length - 3, url.length);
+      // alert('testurl - '+$(this).attr('href'));
+      // alert(id);
+      var r = confirm("Yakin hapus ? Id : " + id);
+      if (r == true) {
+         window.location.href = url;
+      } 
+      e.preventDefault();
+      // }
    });
 
 })(jQuery);
