@@ -91,7 +91,12 @@
                   </div>
                   <div class="row form-group">
                      <div class="col col-md-2"><label for="file-input" class=" form-control-label">Detail Motif</label></div>
-                     <div class="col-12 col-md-9"><input type="file" id="file-input" name="gambar" class="form-control-file"></div>
+                     <div class="col-12 col-md-3"><input type="file" id="file-input" name="gambar" class="form-control-file"></div>
+                  
+                     <div class="col col-md-2"><label for="file-input" class=" form-control-label">Preview</label></div>
+                     <div class="col-12 col-md-4">
+                        <img src="<?=base_url('images/kain/'.$Kain->gambar);?>" width="40%"/>
+                     </div>
                   </div>
                </form>
                 </div>

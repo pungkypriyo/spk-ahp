@@ -40,15 +40,14 @@ if(!function_exists('Static_SelectRadios')){
       if(!empty($ValueSelected)){
          for ($i=0; $i < count($Selection) ; $i++) { 
             $Checked = ($Selection[$i] == strtolower($ValueSelected)) ? 'checked' : '';
-            $_HTML.='<input type="radio" id="'.$OptName.$Selection[$i].'" value="'.$Selection[$i].'" class="form-check-input"' .$Checked.'>';
-            $_HTML.='<label for="'.$OptName.$Selection[$i].'" id="'.$OptName.'" class="form-check-label">'.ucwords($Selection[$i]).'</label>&nbsp;&nbsp;&nbsp;';
+            $_HTML.='<input type="radio" id="'.$Selection[$i].'" name="'.$OptName.'" value="'.$Selection[$i].'" class="form-check-input"' .$Checked.'>';
+            $_HTML.='<label for="'.$Selection[$i].'" class="form-check-label">'.ucwords($Selection[$i]).'</label>&nbsp;&nbsp;&nbsp;';
 
             
          }
       }else{
          $_HTML.='#EmptySelection#';
       }
-      // $_HTML.='</select>';
       return $_HTML;
       // return var_dump($Selection);
    }

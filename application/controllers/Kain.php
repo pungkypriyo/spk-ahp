@@ -94,20 +94,18 @@ class Kain extends CoreModules {
       if($RunUpload == false){
          $this->session->set_flashdata('status','error');         
          $this->session->set_flashdata('msg',_ShowBasicAlert('info','Info !','Gagal upload gambar..'.$this->upload->display_errors(),'dismiss'));
-         redirect('kain/tambahkain','refresh');
+         redirect('kain/tambahkain');
       }else{
          $inputs['gambar'] = $RunUpload['file_name'];
          $insert = $this->App->InsertRecord('data_kain',$inputs);
          if($insert == true){
             $this->session->set_flashdata('status','success');         
-            $this->session->set_flashdata('msg',_ShowBasicAlert('info','Info !','Data berhasil disimpan. :D','dismiss'));
-            // $this->session->set_flashdata('redirect_delay',2);
-            // $this->session->set_flashdata('redirect_url',site_url('kain'));
-            redirect('kain','refresh');
+            $this->session->set_flashdata('msg',_ShowBasicAlert('info','Yeay !','Data berhasil disimpan. :D','dismiss'));
+            redirect('kain');
          }else{
             $this->session->set_flashdata('status','error');         
             $this->session->set_flashdata('msg',_ShowBasicAlert('info','Info !','Gagal simpan data.'.$this->insert->display_errors(),'dismiss'));
-            redirect('kain/tambahkain','refresh');
+            redirect('kain/tambahkain');
          }
          
       }
@@ -142,7 +140,7 @@ class Kain extends CoreModules {
    
    public function form_edit($params=null){
       $id = (!empty($params)) ? $params : '';
-      // if($params != null) $id = $params;
+      
       $data['Kain'] = $this->Mod->getKain($params);
       $data['LoadScripts'] = _LoadJS(array('kain/kain.edit'));
       $data['_Breadcrumb'] = _Breadcrumb($this->uri->segment_array());
