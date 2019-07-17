@@ -9,6 +9,81 @@
    var $obj5 = $('input#inText:eq(35)');
 
    var initForm = function(){
+      $('input#inText:eq(1)').on('keyup',function(e){
+         var hitung = $($('input#inText:eq(7)')).val() / $(this).val();
+         $('input#inText:eq(6)').val(hitung);
+      });
+
+      $('input#inText:eq(2)').on('keyup',function(e){
+         var hitung = $($('input#inText:eq(14)')).val() / $(this).val();
+         $('input#inText:eq(12)').val(hitung);
+      });
+
+      $('input#inText:eq(3)').on('keyup',function(e){
+         var hitung = $($('input#inText:eq(21)')).val() / $(this).val();
+         $('input#inText:eq(18)').val(hitung);
+      });
+
+      $('input#inText:eq(4)').on('keyup',function(e){
+         var hitung = $($('input#inText:eq(28)')).val() / $(this).val();
+         $('input#inText:eq(24)').val(hitung);
+      });
+
+      $('input#inText:eq(5)').on('keyup',function(e){
+         var hitung = $($('input#inText:eq(35)')).val() / $(this).val();
+         $('input#inText:eq(30)').val(hitung);
+      });
+
+      $('input#inText:eq(8)').on('keyup',function(e){
+         var hitung = $($('input#inText:eq(14)')).val() / $(this).val();
+         $('input#inText:eq(13)').val(hitung);
+      });
+
+      $('input#inText:eq(9)').on('keyup',function(e){
+         var hitung = $($('input#inText:eq(21)')).val() / $(this).val();
+         $('input#inText:eq(19)').val(hitung);
+      });
+
+      $('input#inText:eq(10)').on('keyup',function(e){
+         var hitung = $($('input#inText:eq(28)')).val() / $(this).val();
+         $('input#inText:eq(25)').val(hitung);
+      });
+
+      $('input#inText:eq(11)').on('keyup',function(e){
+         var hitung = $($('input#inText:eq(35)')).val() / $(this).val();
+         $('input#inText:eq(31)').val(hitung);
+      });
+
+      $('input#inText:eq(15)').on('keyup',function(e){
+         var hitung = $($('input#inText:eq(21)')).val() / $(this).val();
+         $('input#inText:eq(20)').val(hitung);
+      });
+
+      $('input#inText:eq(16)').on('keyup',function(e){
+         var hitung = $($('input#inText:eq(28)')).val() / $(this).val();
+         $('input#inText:eq(26)').val(hitung);
+      });
+
+      $('input#inText:eq(17)').on('keyup',function(e){
+         var hitung = $($('input#inText:eq(35)')).val() / $(this).val();
+         $('input#inText:eq(32)').val(hitung);
+      });
+
+      $('input#inText:eq(22)').on('keyup',function(e){
+         var hitung = $($('input#inText:eq(28)')).val() / $(this).val();
+         $('input#inText:eq(27)').val(hitung);
+      });
+
+      $('input#inText:eq(23)').on('keyup',function(e){
+         var hitung = $($('input#inText:eq(35)')).val() / $(this).val();
+         $('input#inText:eq(33)').val(hitung);
+      });
+
+      $('input#inText:eq(29)').on('keyup',function(e){
+         var hitung = $($('input#inText:eq(35)')).val() / $(this).val();
+         $('input#inText:eq(34)').val(hitung);
+      });
+
       // Style::Centering text inside inputs
       $('.form-control').css('text-align','center');
       // Style::NumberFormats
