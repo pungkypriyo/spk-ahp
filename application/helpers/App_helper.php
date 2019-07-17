@@ -115,3 +115,11 @@ if(!function_exists('_DtImages')){
       return $_HTML;
    }
 }
+
+if(!function_exists('sizeGambar')){
+   function sizeGambar($img_path,$alt=null){
+      $alt = (empty($alt) ? $img_path : $alt);
+      $_HTML ='<img class="card-img-top" src="'.base_url("images/".$img_path).'" alt="'.$alt.'" height="300px">';
+      return $_HTML;
+   }
+}

@@ -1,6 +1,6 @@
 (function ($) {
    /* Datatables */
-   var dt_url = base_url() + 'landing/datatables';
+   var dt_url = base_url() + 'landing/datatablesDashboard';
    var dt_table = $('table#table-data');
 
    var oTable = dt_table.DataTable({
@@ -24,7 +24,7 @@
          { "data": ['grade'] },
          { "data": ['pengguna'] },
          { "data": ['gambar'] },
-         { "data": ['act'] }
+         { "data": ['pilih'] }
       ],
       "columnDefs": [
          {
@@ -45,16 +45,4 @@
          "sInfo": "<b> _END_ </b> dari Total _TOTAL_ data"
       }
    });
-
-   dt_table.on('click', 'a#btn-detil', function (e) {
-      var url = $(this).attr('href');
-      var id = url.substring(url.length - 3, url.length);
-      var data = oTable.row($(this).parents('tr')).data();
-
-      var img = $('#datamodal').find('#gambar-kain');
-      img.html('');
-      img.html(data['gambar']);
-      e.preventDefault();
-   });
-   
 })(jQuery);
