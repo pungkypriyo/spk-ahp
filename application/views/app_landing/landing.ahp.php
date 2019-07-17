@@ -1,6 +1,11 @@
 <?=$_Breadcrumb;?>
 
-<div class="content mt-2">            
+<div class="content mt-2">    
+   <?php
+      if($this->session->flashdata('msg')){
+         echo "<div class='row'><div class='col-md-12'>".$this->session->flashdata('msg')."</div></div>";
+      } 
+   ?>       
    <div class=" col-lg-12">
          <div class="card">
             <div class="card-body">
@@ -24,24 +29,7 @@
                         </tr>
                      </thead>
                      <tbody>
-                     <tr>
-                        <?php foreach($ListKain as $u){ ?>
-                           <tr>
-                              <td><?= $u->id_kain?></td>
-                              <td><?php echo $u->nm_kain?></td>
-                              <td><?php echo $u->jenis_bahan?></td>
-                              <td><?php echo $u->tipe_benang?></td>
-                              <td><?php echo $u->corak_kain?></td>
-                              <td><?php echo $u->kualitas_serap?></td>
-                              <td><?php echo $u->grade_kain?></td>
-                              <td><?php echo $u->kategori_pengguna?></td>
-                              <td><?php echo $u->gambar?></td>
-                              <td>
-                                 <input type="checkbox" id="checkbox1" name="checkbox1" value="option1" class="form-check-input">
-                              </td>
-                           </tr>
-                           <?php } ?>
-                        </tr>
+                     
                      </tbody>
                   </table>
                   <a href="<?=site_url('Landing/Ahp2');?>" class="btn btn-success"><i class="ti-angle-right"></i>&nbsp; Selanjutnya</a>

@@ -14,6 +14,7 @@
 <script src="<?=base_url();?>/vendors/datatables.net-buttons/js/buttons.colVis.min.js"></script>
 <!-- <script src="<?=base_url();?>/assets/js/init-scripts/data-table/datatables-init.js"></script> -->
 
+<script src="<?=base_url();?>/appjs/app.base.js"></script>
 <?php
    if(!isset($LoadScripts) && empty($LoadScripts)){
       echo '<!-- No Script Loaded -->';

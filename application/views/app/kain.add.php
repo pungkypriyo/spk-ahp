@@ -39,7 +39,7 @@
                   <!-- </div>
                   <div class="row form-group"> -->
                      <div class="col col-md-2"><label for="tipe_benang" class=" form-control-label">Tipe Benang</label></div>
-                     <div class="col-12 col-md-3">
+                     <div class="col-12 col-md-4">
                         <select name="tipe_benang" id="tipe_benang" class="form-control">
                            <option value="0">- Pilih Tipe Benang -</option>
                            <option value="20s">20s</option>

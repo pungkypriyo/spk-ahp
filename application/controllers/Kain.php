@@ -14,7 +14,7 @@ class Kain extends CoreModules {
 	public function index($params = null){
 
       $data['ListKain'] = $this->Mod->getdata();
-      $data['_Breadcrumb'] = _Breadcrumb(array(1=>'Dashboard',2=>'Data Kain'));
+      $data['_Breadcrumb'] = _Breadcrumb(array(1=>'Dashboard',2=>'Data Motif Kain'));
       $data['LoadScripts'] = _LoadJS(array('kain/kain'));
       
       $this->template->DisplayView('dashboard','app/kain.datakain',$data);
@@ -67,7 +67,8 @@ class Kain extends CoreModules {
    
    public function tambahkain(){
       $data['LoadScripts'] = _LoadJS(array('kain/kain.add'));
-      $data['_Breadcrumb'] = _Breadcrumb($this->uri->segment_array());
+      $data['_Breadcrumb'] = _Breadcrumb(array(1=>'Kain',2=>'Tambah Motif Kain'));
+      //$data['_Breadcrumb'] = _Breadcrumb($this->uri->segment_array());
 		$this->template->DisplayView('dashboard','app/kain.add',$data);
    }
    
@@ -143,7 +144,7 @@ class Kain extends CoreModules {
       
       $data['Kain'] = $this->Mod->getKain($params);
       $data['LoadScripts'] = _LoadJS(array('kain/kain.edit'));
-      $data['_Breadcrumb'] = _Breadcrumb($this->uri->segment_array());
+      $data['_Breadcrumb'] = _Breadcrumb(array(1=>'Kain',2=>'Edit Motif Kain'));
 		$this->template->DisplayView('dashboard','app/kain.edit',$data);
    }
 

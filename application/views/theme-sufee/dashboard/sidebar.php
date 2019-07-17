@@ -10,7 +10,7 @@
    <div id="main-menu" class="main-menu collapse navbar-collapse">
          <ul class="nav navbar-nav">
             <li class="active">
-               <a href="#"> <i class="menu-icon fa fa-dashboard"></i>Dashboard </a>
+               <a href="<?=site_url('dashboard');?>"> <i class="menu-icon fa fa-dashboard"></i>Dashboard </a>
             </li>
             <h3 class="menu-title">Master</h3><!-- /.menu-title -->
             <li>
