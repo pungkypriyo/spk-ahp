@@ -19,6 +19,9 @@
             <li>
                <a href="<?=site_url('acuan');?>"> <i class="menu-icon fa fa-table"></i>Data Bobot Acuan </a>
             </li>
+            <li>
+               <a href="<?=site_url('nilai');?>"> <i class="menu-icon fa fa-table"></i>Data Bobot Nilai </a>
+            </li>
          </ul>
    </div><!-- /.navbar-collapse -->
 </nav>

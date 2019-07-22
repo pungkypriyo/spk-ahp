@@ -17,7 +17,7 @@
          </div>
          <div class="card-body">
                <?php
-                  // print_r($List);
+                  print_r($List);
                   $data = array();
                   $row = array();
                   foreach ($List as $key) {
