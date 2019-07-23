@@ -68,5 +68,15 @@ class NilaiModel extends CI_Model {
                ->from('data_kriteria');
    }
 
+   public function get_kriteria(){
+      $this->query_kriteria();
+      $data = $this->db->get();
+      if($data->num_rows() > 0 ){
+         return $data->result();
+      }else{
+         return false;
+      }  
+   }
+
 
 }
