@@ -26,15 +26,41 @@ class Nilai extends CoreModules {
       $this->template->DisplayView('dashboard','app/bobot.nilai',$data);
    }
 
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
    function get_compiled_table($id_kriteria){
       $HTML_HEADER = $this->get_row_header($id_kriteria);
       $HTML_CONTENT = $this->get_row_content($id_kriteria);
       $HTML_TOTAL = $this->get_row_total($id_kriteria);
-      $HTML = '<table id="table-data" class="table table-striped table-bordered" style="text-align:center;">';
+      $HTML = $this->get_compiled_button($id_kriteria);
+      $HTML.= '<table id="table-data-'.$id_kriteria.'" class="table table-striped table-bordered" style="text-align:center;">';
       $HTML.= $HTML_HEADER;
       $HTML.= $HTML_CONTENT;
       $HTML.= $HTML_TOTAL;
       $HTML.= '</table>';
+      return $HTML;
+   }
+
+   function get_compiled_button($id_kriteria){
+      $cKriteria = $this->App->_GetTableData('data_kriteria',array('id_kriteria' => $id_kriteria));
+      $HTML = '<div class="row pb-2">';
+      $HTML.= '<div class="col-md-6">';
+      $HTML.= '<h3>'.$cKriteria->nm_kriteria.'</h3>';
+      $HTML.= '</div>';
+      $HTML.= '<div class="col-md-6">';
+      $HTML.= '<button type="button" class="btn btn-primary btn-sm float-right" id="btn-edit'.$id_kriteria.'">';
+      $HTML.= '<i class="fa fa-dot-circle-o"></i> Edit Bobot';
+      $HTML.= '</button>';
+      $HTML.= '<button type="button" class="btn btn-danger btn-sm float-right" id="btn-batal'.$id_kriteria.'">';
+      $HTML.= '<i class="fa fa-times"></i> Batal';
+      $HTML.= '</button>';
+      $HTML.= '<button type="submit" class="btn btn-primary btn-sm float-right" id="btn-simpan'.$id_kriteria.'">';
+      $HTML.= '<i class="fa fa-dot-circle-o"></i> Simpan Data';
+      $HTML.= '</button>';
+      $HTML.= '</div>';
+      $HTML.= '</div>';
       return $HTML;
    }
 
@@ -70,7 +96,7 @@ class Nilai extends CoreModules {
          $HTML.='<td style="font-size:14px">'.$cVal.'</td>';
          foreach ($row['item'] as $cItemKey => $cItemVal) {
             // echo '<td>'.$row['item'][$cRow][$cItemKey].'</td>';
-            $HTML.='<td><input class="form-control-sm form-control input-sm" type="text" id="inText" name="bobot[]" value="'.$row['item'][$cRow][$cItemKey].'"></td>';
+            $HTML.='<td><input class="form-control-sm form-control input-sm" type="text" id="inTextBobotK-'.$id_kriteria.'" name="bobot_k'.$id_kriteria.'[]" value="'.$row['item'][$cRow][$cItemKey].'"></td>';
          }
          $HTML.='</tr>';
       }
