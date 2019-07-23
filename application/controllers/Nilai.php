@@ -26,8 +26,6 @@ class Nilai extends CoreModules {
       $this->template->DisplayView('dashboard','app/bobot.nilai',$data);
    }
 
-
-
    function get_compiled_table($id_kriteria){
       $HTML_HEADER = $this->get_row_header($id_kriteria);
       $HTML_CONTENT = $this->get_row_content($id_kriteria);
@@ -47,9 +45,9 @@ class Nilai extends CoreModules {
       $HTML ='';
       $HTML .='<tr>';
       // $HTML .='<td style="font-size:11px">'.$cVal.'</td>';
-      $HTML .='<td style="font-size:11px">'.$cKriteria->nm_kriteria.'</td>';
+      $HTML .='<td style="font-size:14px">'.$cKriteria->nm_kriteria.'</td>';
       foreach ($cList as $kain) {
-         $HTML .='<td style="font-size:11px">'.$kain->nm_kain.'</td>';
+         $HTML .='<td style="font-size:14px">'.$kain->nm_kain.'</td>';
       }
       $HTML .='</tr>';
       return $HTML;
@@ -69,7 +67,7 @@ class Nilai extends CoreModules {
       foreach ($row['parent'] as $cRow => $cVal) {
          
          $HTML.= '<tr>';
-         $HTML.='<td style="font-size:11px">'.$cVal.'</td>';
+         $HTML.='<td style="font-size:14px">'.$cVal.'</td>';
          foreach ($row['item'] as $cItemKey => $cItemVal) {
             // echo '<td>'.$row['item'][$cRow][$cItemKey].'</td>';
             $HTML.='<td><input class="form-control-sm form-control input-sm" type="text" id="inText" name="bobot[]" value="'.$row['item'][$cRow][$cItemKey].'"></td>';
@@ -90,7 +88,7 @@ class Nilai extends CoreModules {
       
       $HTML= '';
       $HTML.= '<tr>';
-      $HTML.='<td style="font-size:11px">Jumlah</td>';
+      $HTML.='<td style="font-size:14px">Jumlah</td>';
       $cData = array();
       foreach ($row['parent'] as $cRow => $cVal) {
          $cData[] = $row['item'][$cRow];   

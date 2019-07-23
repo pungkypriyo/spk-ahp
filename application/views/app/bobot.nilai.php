@@ -49,6 +49,18 @@
                   <h3 style="text-align:center;">Corak Kain</h3>
                   <?=$TableCorak;?>
                </div>
+               <div class="tab-pane fade" id="dayaSerap" role="tabpanel" aria-labelledby="dayaSerap-tab">
+                  <h3 style="text-align:center;">Kualitas Daya Serap</h3>
+                  <?=$TableSerap;?>
+               </div>
+               <div class="tab-pane fade" id="gradeKain" role="tabpanel" aria-labelledby="gradeKain-tab">
+                  <h3 style="text-align:center;">Grade Kain</h3>
+                  <?=$TableGrade;?>
+               </div>
+               <div class="tab-pane fade" id="kategoriPengguna" role="tabpanel" aria-labelledby="kategoriPengguna-tab">
+                  <h3 style="text-align:center;">Kategori Pengguna</h3>
+                  <?=$TablePengguna;?>
+               </div>
             </div>
          </div>
       </div>
