@@ -4,16 +4,7 @@
    <div class=" col-lg-12">
       <div class="card">
          <div class="card-header">
-            <strong class="card-title">Data Bobot Nilai</strong>
-            <button type="button" class="btn btn-primary btn-sm float-right" id="btn-edit">
-               <i class="fa fa-dot-circle-o"></i> Edit Bobot
-            </button>
-            <button type="button" class="btn btn-danger btn-sm float-right" id="btn-batal">
-               <i class="fa fa-times"></i> Batal
-            </button> 
-            <button type="submit" class="btn btn-primary btn-sm float-right" id="btn-simpan">
-               <i class="fa fa-dot-circle-o"></i> Simpan Data
-            </button> 
+            <strong class="card-title">Data Bobot Nilai</strong>            
          </div>
          <div class="card-body">
             <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -38,28 +29,40 @@
             </ul>
             <div class="tab-content pl-3 p-1" id="myTabContent">
                <div class="tab-pane fade show active" id="jenisBahan" role="tabpanel" aria-labelledby="jenisBahan-tab">
-                  <h3 style="text-align:center;">Jenis Bahan</h3>
+                  <br>
                   <?=$TableJenisBahan;?>
+                  <br>
+                  <?=$TableJenisBahanNorm;?>
                </div>
                <div class="tab-pane fade" id="tipeBenang" role="tabpanel" aria-labelledby="tipeBenang-tab">
-                  <h3 style="text-align:center;">Tipe Benang</h3>
+                  <br>
                   <?=$TableBenang;?>
+                  <br>
+                  <?=$TableBenangNorm;?>
                </div>
                <div class="tab-pane fade" id="corakKain" role="tabpanel" aria-labelledby="corakKain-tab">
-                  <h3 style="text-align:center;">Corak Kain</h3>
+                  <br>
                   <?=$TableCorak;?>
+                  <br>
+                  <?=$TableCorakNorm;?>
                </div>
                <div class="tab-pane fade" id="dayaSerap" role="tabpanel" aria-labelledby="dayaSerap-tab">
-                  <h3 style="text-align:center;">Kualitas Daya Serap</h3>
+                  <br>
                   <?=$TableSerap;?>
+                  <br>
+                  <?=$TableSerapNorm;?>
                </div>
                <div class="tab-pane fade" id="gradeKain" role="tabpanel" aria-labelledby="gradeKain-tab">
-                  <h3 style="text-align:center;">Grade Kain</h3>
+                  <br>
                   <?=$TableGrade;?>
+                  <br>
+                  <?=$TableGradeNorm;?>
                </div>
                <div class="tab-pane fade" id="kategoriPengguna" role="tabpanel" aria-labelledby="kategoriPengguna-tab">
-                  <h3 style="text-align:center;">Kategori Pengguna</h3>
+                  <br>
                   <?=$TablePengguna;?>
+                  <br>
+                  <?=$TablePenggunaNorm;?>
                </div>
             </div>
          </div>
