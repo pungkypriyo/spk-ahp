@@ -17,7 +17,10 @@ class Nilai extends CoreModules {
 
       $data['TableJenisBahan'] = $this->get_compiled_table(1);
       $data['TableBenang'] = $this->get_compiled_table(2);
-
+      $data['TableCorak'] = $this->get_compiled_table(3);
+      $data['TableSerap'] = $this->get_compiled_table(4);
+      $data['TableGrade'] = $this->get_compiled_table(5);
+      $data['TablePengguna'] = $this->get_compiled_table(6);
       $data['_Breadcrumb'] = _Breadcrumb(array(1=>'Dashboard',2=>'Bobot Nilai'));
       $data['LoadScripts'] = _LoadJS(array('bobot/nilai'));
       $this->template->DisplayView('dashboard','app/bobot.nilai',$data);
