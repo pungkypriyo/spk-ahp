@@ -234,6 +234,27 @@
    }
 
    /* Event Handler Buttons */
+   $('button#btn-simpan4').click(function (e) {
+      var values = $("input#inTextBobotK-4").map(function () { return $(this).val(); }).get();
+      // console.log(values);
+      console.log($('form#frm_data_4').serialize());
+      var dataArr = $('form#frm_data_4').serialize();
+      $.ajax({
+         type: "POST",
+         url: base_url() + 'nilai/update_bobot',
+         data: dataArr,
+         dataType: 'json',
+         failure: function (errMsg) {
+            console.error("error:", errMsg);
+         },
+         success: function (data) {
+            alert(data.msg);
+            location.href = data.redirect;    
+         }
+      });
+      e.preventDefault();
+   });
+
    // On Edit
    $('button#btn-edit4').click(function(e){
       onEdit();

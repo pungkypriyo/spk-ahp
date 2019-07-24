@@ -5,7 +5,7 @@
       <div class="card">
          <div class="card-header">
             <strong class="card-title">Data Bobot Acuan Kriteria</strong>
-            <button type="button" class="btn btn-primary btn-sm float-right" id="btn-edit">
+            <!-- <button type="button" class="btn btn-primary btn-sm float-right" id="btn-edit">
                <i class="fa fa-dot-circle-o"></i> Edit Bobot
             </button>
             <button type="button" class="btn btn-danger btn-sm float-right" id="btn-batal">
@@ -13,11 +13,11 @@
             </button> 
             <button type="submit" class="btn btn-primary btn-sm float-right" id="btn-simpan">
                <i class="fa fa-dot-circle-o"></i> Simpan Data
-            </button> 
+            </button>  -->
          </div>
          <div class="card-body">
                <?php
-                  print_r($List);
+                  // print_r($List);
                   $data = array();
                   $row = array();
                   foreach ($List as $key) {

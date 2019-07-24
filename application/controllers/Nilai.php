@@ -11,8 +11,7 @@ class Nilai extends CoreModules {
    }
    
 
-	public function index($params = null)
-	{
+	public function index($params = null){
       $acuan = $this->Mod->get_list_acuan();
 
       $data['TableJenisBahan'] = $this->get_compiled_table(1);
@@ -49,11 +48,14 @@ class Nilai extends CoreModules {
       $HTML_CONTENT = $this->get_row_content($id_kriteria);
       $HTML_TOTAL = $this->get_row_total($id_kriteria);
       $HTML = $this->get_compiled_button($id_kriteria);
+      $HTML.= '<form id="frm_data_'.$id_kriteria.'">';
+      $HTML.= '<input type="hidden" name="kriteria_id" value="'.$id_kriteria.'">';
       $HTML.= '<table id="table-data-'.$id_kriteria.'" class="table table-striped table-bordered" style="text-align:center;">';
       $HTML.= $HTML_HEADER;
       $HTML.= $HTML_CONTENT;
       $HTML.= $HTML_TOTAL;
       $HTML.= '</table>';
+      $HTML.= '</form>';
       return $HTML;
    }
 
@@ -70,7 +72,7 @@ class Nilai extends CoreModules {
       $HTML.= '<button type="button" class="btn btn-danger btn-sm float-right" id="btn-batal'.$id_kriteria.'">';
       $HTML.= '<i class="fa fa-times"></i> Batal';
       $HTML.= '</button>';
-      $HTML.= '<button type="submit" class="btn btn-primary btn-sm float-right" id="btn-simpan'.$id_kriteria.'">';
+      $HTML.= '<button type="button" class="btn btn-primary btn-sm float-right" id="btn-simpan'.$id_kriteria.'">';
       $HTML.= '<i class="fa fa-dot-circle-o"></i> Simpan Data';
       $HTML.= '</button>';
       $HTML.= '</div>';
@@ -97,7 +99,8 @@ class Nilai extends CoreModules {
       $cList = $this->Mod->get_bobot($id_kriteria);
       $row = array();
       foreach ($cList as $key) {
-         $row['item'][$key->id_kain][$key->id_kain_to] = $key->nilai_bobot;
+         // $row['item'][$key->id_kain][$key->id_kain_to] = $key->nilai_bobot;
+         $row['item'][$key->id_kain][$key->id_kain_to] = array('idb' => $key->id_bobot,'bobot' =>$key->nilai_bobot);
          $row['parent'][$key->id_kain] = $key->nm_kain;
       }
       
@@ -109,7 +112,10 @@ class Nilai extends CoreModules {
          $HTML.='<td style="font-size:14px">'.$cVal.'</td>';
          foreach ($row['item'] as $cItemKey => $cItemVal) {
             // echo '<td>'.$row['item'][$cRow][$cItemKey].'</td>';
-            $HTML.='<td><input class="form-control-sm form-control input-sm" type="text" id="inTextBobotK-'.$id_kriteria.'" name="bobot_k'.$id_kriteria.'[]" value="'.$row['item'][$cRow][$cItemKey].'"></td>';
+            $HTML.='<td>';
+            $HTML.='<input class="form-control-sm form-control input-sm" type="text" id="inTextBobotK-'.$id_kriteria.'" name="bobot_k'.$id_kriteria.'[]" value="'.$row['item'][$cRow][$cItemKey]['bobot'].'">';
+            $HTML.='<input type="hidden" id="inTextBobotIdK-'.$id_kriteria.'" name="bobot_id_k'.$id_kriteria.'[]" value="'.$row['item'][$cRow][$cItemKey]['idb'].'">';
+            $HTML.='</td>';
          }
          $HTML.='</tr>';
       }
@@ -141,7 +147,7 @@ class Nilai extends CoreModules {
          }
       }
       foreach ($sum as $key => $value) {
-         $HTML.='<td><input class="form-control-sm form-control input-sm" type="text" id="inTextTotalK-'.$id_kriteria.'" name="bobot[]" value="'.$sum[$key].'"></td>';            
+         $HTML.='<td><input class="form-control-sm form-control input-sm" type="text" id="inTextTotalK-'.$id_kriteria.'" disabled="disabled" value="'.$sum[$key].'"></td>';            
       }
       // var_dump($sum);
       
@@ -155,7 +161,7 @@ class Nilai extends CoreModules {
       $ContentList = $this->get_content_normalisasi($id_kriteria);
       $cKriteria = $this->App->_GetTableData('data_kriteria',array('id_kriteria' => $id_kriteria));
 
-      $HTML_HEADER = $this->get_row_header($id_kriteria);
+      $HTML_HEADER = $this->get_row_header_normalisasi($id_kriteria);
       $HTML_CONTENT = $this->get_row_content_normalisasi($id_kriteria);
       $HTML_TOTAL = $this->get_row_total_normalisasi($ContentList);
 
@@ -165,6 +171,22 @@ class Nilai extends CoreModules {
       $HTML.= $HTML_CONTENT;
       $HTML.= $HTML_TOTAL;
       $HTML.= '</table>';
+      return $HTML;
+   }
+
+   function get_row_header_normalisasi($id_kriteria){
+      $cKriteria = $this->App->_GetTableData('data_kriteria', array('id_kriteria' => $id_kriteria ));
+      $cList = $this->Mod->get_kain();
+
+      $HTML ='';
+      $HTML .='<tr>';
+      $HTML .='<td style="font-size:14px">'.$cKriteria->nm_kriteria.'</td>';
+      foreach ($cList as $kain) {
+         $HTML .='<td style="font-size:14px">'.$kain->nm_kain.'</td>';
+      }
+      $HTML .='<td style="font-size:14px">Jumlah</td>';
+      $HTML .='<td style="font-size:14px">PV</td>';
+      $HTML .='</tr>';
       return $HTML;
    }
 
@@ -184,10 +206,19 @@ class Nilai extends CoreModules {
       foreach ($row['parent'] as $cRow => $cVal) {
          $HTML.= '<tr>';
          $HTML.='<td style="font-size:14px">'.$cVal.'</td>';
+         $cData = array();
+         $cDataSum = array();
          foreach ($row['item'] as $cItemKey => $cItemVal) {
+            $cData[] = round(($row['item'][$cRow][$cItemKey] / $cDivision[$cItemKey]),2);
+            $cDataSum[] = $row['item'][$cRow][$cItemKey] / $cDivision[$cItemKey];
             $opDiv = round(($row['item'][$cRow][$cItemKey] / $cDivision[$cItemKey]),2);
             $HTML.='<td><input class="form-control-sm form-control input-sm" type="text" id="inText" name="bobot[]" value="'.$opDiv.'"></td>';
          }
+         $HTML.='<td><input class="form-control-sm form-control input-sm" type="text" id="inText" name="bobot[]" value="'.array_sum($cData).'"></td>';
+         $pvDiv = $this->get_pv_division($this->get_content_normalisasi($id_kriteria));
+         $countDiv = round((array_sum($cDataSum) / $pvDiv),2) ;
+         $HTML.='<td><input class="form-control-sm form-control input-sm" type="text" id="RowPv'.$id_kriteria.'" name="RowNormTotal[]" value="'.$countDiv.'" disabled="disabled"></td>';            
+         
          $HTML.='</tr>';
       }
       return $HTML;
@@ -238,6 +269,8 @@ class Nilai extends CoreModules {
          $HTML.='<td><input class="form-control-sm form-control input-sm" type="text" id="RowNormTotal" name="RowNormTotal[]" value="'.$sum[$key].'"></td>';            
          // $HTML.='<td><input class="form-control-sm form-control input-sm" type="text" id="inTextTotalK-'.$id_kriteria.'" name="bobot[]" value="'.$sum[$key].'"></td>';            
       }
+
+      $HTML.='<td><input class="form-control-sm form-control input-sm" type="text" id="RowNormTotal" name="RowNormTotal[]" value="'.array_sum($sum).'"></td>';            
       $HTML.= '</tr>';
       return $HTML;
    }
@@ -251,9 +284,6 @@ class Nilai extends CoreModules {
          $row['parent'][$key->id_kain] = $key->nm_kain;
       }
       
-      $HTML= '';
-      $HTML.= '<tr>';
-      $HTML.='<td style="font-size:14px">Jumlah</td>';
       $cData = array();
       foreach ($row['parent'] as $cRow => $cVal) {
          $cData[] = $row['item'][$cRow];   
@@ -266,17 +296,57 @@ class Nilai extends CoreModules {
             $sum[$sub_key]+=$value;
          }
       }
-
-      foreach ($sum as $key => $value) {
-         // $HTML.='<td><input class="form-control-sm form-control input-sm" type="text" id="inText" name="bobot[]" value="'.$sum[$key].'"></td>';            
-      }
-      // var_dump($sum);
-      
-      // $HTML.= '</tr>';
       return $sum;
    }
 
-   
+   // get divisions after normalisasi
+   function get_pv_division($dataList=array()){
+      $sum = array();
+      $HTML ='';
+      foreach ($dataList as $key => $sub_array) {
+         foreach ($sub_array as $sub_key => $value) {
+            if( ! array_key_exists($sub_key, $sum)) $sum[$sub_key] = 0;
+            $sum[$sub_key]+=$value;
+         }
+      }
+      
+      return array_sum($sum);
+   }
+
+
+   function update_bobot(){
+      $inputs = $this->input->post();
+      $inDataBobot = $inputs['bobot_k'.$inputs['kriteria_id']];
+      $inDataBobotId = $inputs['bobot_id_k'.$inputs['kriteria_id']];
+      $arrData = array();
+      for($x = 0; $x < sizeof($inDataBobot); $x++){
+         $arrData[] = array(
+            'id_bobot' => $inDataBobotId[$x],
+            'nilai_bobot' => $inDataBobot[$x]
+         );
+      }
+
+      $update = $this->db->update_batch('data_bobot',$arrData, 'id_bobot'); 
+      if($update == true){
+         $response = array(
+            'status' => 'success',
+            'msg' => 'Berhasil update data bobot.',
+            'redirect' => site_url('nilai')
+         );
+      }else{
+        
+         $response = array(
+            'status' => 'error',
+            'msg' => $this->db->_error_message(),
+            'redirect' => site_url('nilai')
+         );
+      }
+      // echo json_encode($inputs['bobot_k1']);
+      // echo json_encode($inDataBobot);
+      // echo json_encode($arrData);
+      echo json_encode($response);
+   }
+
    public function forms(){
       $data['_Breadcrumb'] = _Breadcrumb($this->uri->segment_array());
 		$this->template->DisplayView('dashboard','app/bobot.nilai',$data);
