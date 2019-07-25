@@ -100,9 +100,16 @@ class Kain extends CoreModules {
          $inputs['gambar'] = $RunUpload['file_name'];
          $insert = $this->App->InsertRecord('data_kain',$inputs);
          if($insert == true){
-            $this->session->set_flashdata('status','success');         
-            $this->session->set_flashdata('msg',_ShowBasicAlert('info','Yeay !','Data berhasil disimpan. :D','dismiss'));
-            redirect('kain');
+            $insert_bobot = $this->insert_automatic_bobot();
+            if($insert_bobot = true){
+               $this->session->set_flashdata('status','success');         
+               $this->session->set_flashdata('msg',_ShowBasicAlert('info','Yeay !','Data berhasil disimpan. Silahkan atur data bobot kain :D','dismiss'));
+               redirect('kain');
+            }else{
+               $this->session->set_flashdata('status','error');         
+               $this->session->set_flashdata('msg',_ShowBasicAlert('info','Info !','Gagal update data bobot.'.$this->insert->display_errors(),'dismiss'));
+               redirect('kain/tambahkain');   
+            }
          }else{
             $this->session->set_flashdata('status','error');         
             $this->session->set_flashdata('msg',_ShowBasicAlert('info','Info !','Gagal simpan data.'.$this->insert->display_errors(),'dismiss'));
@@ -111,6 +118,24 @@ class Kain extends CoreModules {
          
       }
       
+   }
+
+   function insert_automatic_bobot(){
+      $data = $this->Mod->get_listed_kain();
+      $arrData = array();
+      foreach ($data as $array) {
+         $arrData = array_merge($arrData,$array);
+      }
+
+      $vaReadyInputs = $arrData;
+      // echo sizeof($vaReadyInputs);
+      // echo json_encode($vaReadyInputs);
+      $insert = $this->db->insert_batch('data_bobot',$vaReadyInputs); 
+      if($insert == true) {
+         return true;
+      }else{
+         return false;
+      }
    }
 
    // Upload Image
@@ -235,9 +260,18 @@ class Kain extends CoreModules {
          $id = array('id_kain' => $params);
          $delete = $this->db->delete('data_kain',$id);
          if($delete){
-            $this->session->set_flashdata('status','success');         
-            $this->session->set_flashdata('msg',_ShowBasicAlert('info','Yeay !','Data berhasil dihapus. :D','dismiss'));
-            redirect('kain');
+            $this->db->where('id_kain',$params);
+            $this->db->or_where('id_kain_to',$params);
+            $delete_bobot = $this->db->delete('data_bobot');
+            if($delete_bobot){
+               $this->session->set_flashdata('status','success');         
+               $this->session->set_flashdata('msg',_ShowBasicAlert('info','Yeay !','Data berhasil dihapus. :D','dismiss'));
+               redirect('kain');
+            }else{
+               $this->session->set_flashdata('status','error');         
+               $this->session->set_flashdata('msg',_ShowBasicAlert('danger','Info !','Gagal hapus data bobot.','dismiss'));
+               redirect('kain');
+            }
          }else{
             $this->session->set_flashdata('status','error');         
             $this->session->set_flashdata('msg',_ShowBasicAlert('danger','Info !','Gagal hapus data.','dismiss'));

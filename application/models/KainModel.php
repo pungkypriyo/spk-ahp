@@ -104,8 +104,65 @@ class KainModel extends CI_Model {
         return $kodejadi;
    }
 
+   
 
 /* Data Processing :: Edit */
+   function get_last_kain(){
+      $this->db->select('id_kain')
+               ->from($this->table)
+               ->order_by('id_kain','desc')
+               ->limit(1);
+      $data = $this->db->get();
+      return $data->row();
+   }
+   
+   public function get_listed_kain(){
+      $id_kain_new = $this->get_last_kain();
+      $all = $this->get_kain_data();
+      $exc = $this->get_kain_data('except');
+      $kriteria = $this->get_kriteria();
+      
+
+      
+      $cAll = array();
+      foreach ($all as $key) {
+         $cAll[] = array('id_kain' => $id_kain_new->id_kain,'id_kain_to' => $key->id_kain);
+      }
+      $cExc = array();
+      foreach ($exc as $key) {
+         $cExc[] = array('id_kain' => $key->id_kain,'id_kain_to' => $id_kain_new->id_kain);
+      }
+      $merge = array_merge($cAll,$cExc);
+      
+      $vaRet = array();
+      $vaData = array();
+      foreach ($kriteria as $cKey => $val) {
+         // $cKriteria = array('id_kriteria' => $cKey->id_kriteria);
+         $getList = array();
+         foreach ($merge as $key => $value) {
+            $getList[] = array_merge($merge[$key],array('id_kriteria' => $val->id_kriteria));
+         }
+         $vaData[] = $getList;
+      }
+      // $vaRet = $getList;
+      // $kain['all'] = $this->get_kain_data();
+      // $kain['except'] = $this->get_kain_data('except');
+      // return $merge;
+      // return $vaRet;
+      return $vaData;
+   }
+
+/* Data Processing :: Edit */
+   public function get_kain_data($params = null){
+      $GetLastId = $this->get_last_kain();
+      $this->db->select('id_kain');
+      $this->db->from($this->table);
+      if($params == 'except')
+         $this->db->where('id_kain <> ',$GetLastId->id_kain);
+      $data = $this->db->get();
+      return $data->result();
+   }
+
    public function getKain($id){
      $this->query();
      $this->db->where($this->pk,$id);
@@ -127,6 +184,17 @@ class KainModel extends CI_Model {
       }else{
          return false;
       }
+   }
+
+   /* Get Kriteria */
+   public function get_kriteria(){
+     $this->db->select('id_kriteria');
+     $data = $this->db->get('data_kriteria'); 
+     if($data->num_rows() > 0 ){
+        return $data->result();
+     }else{
+        return false;
+     }
    }
 
 
