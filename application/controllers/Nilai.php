@@ -113,7 +113,7 @@ class Nilai extends CoreModules {
          foreach ($row['item'] as $cItemKey => $cItemVal) {
             // echo '<td>'.$row['item'][$cRow][$cItemKey].'</td>';
             $HTML.='<td>';
-            $HTML.='<input class="form-control-sm form-control input-sm" type="text" id="inTextBobotK-'.$id_kriteria.'" name="bobot_k'.$id_kriteria.'[]" value="'.$row['item'][$cRow][$cItemKey]['bobot'].'">';
+            $HTML.='<input class="form-control-sm form-control input-sm" type="text" data-row="'.number_format($cRow).'" data-col="'.number_format($cItemKey).'" id="inTextBobotK-'.$id_kriteria.'" name="bobot_k'.$id_kriteria.'[]" value="'.$row['item'][$cRow][$cItemKey]['bobot'].'">';
             $HTML.='<input type="hidden" id="inTextBobotIdK-'.$id_kriteria.'" name="bobot_id_k'.$id_kriteria.'[]" value="'.$row['item'][$cRow][$cItemKey]['idb'].'">';
             $HTML.='</td>';
          }
