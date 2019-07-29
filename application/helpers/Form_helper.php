@@ -52,3 +52,63 @@ if(!function_exists('Static_SelectRadios')){
       // return var_dump($Selection);
    }
 }
+
+if (!function_exists('DynamicValueRange')) {
+   function DynamicValueRange($cRow,$cCol){
+      $_HTML='';
+      $_HTML.='<div class="btn-group btn-group-toggle" data-toggle="buttons">';
+      $_HTML.='<label class="btn btn-outline-primary btn-sm">';
+      $_HTML.='<input type="radio" name="options" id="opt_'.$cRow.'_'.$cCol.'" autocomplete="off" value="9">9';
+      $_HTML.='</label>';
+      $_HTML.='<label class="btn btn-outline-primary btn-sm">';
+      $_HTML.='<input type="radio" name="options" id="opt_'.$cRow.'_'.$cCol.'" autocomplete="off" value="8">8';
+      $_HTML.='</label>';
+      $_HTML.='<label class="btn btn-outline-primary btn-sm">';
+      $_HTML.='<input type="radio" name="options" id="opt_'.$cRow.'_'.$cCol.'" autocomplete="off" value="7">7';
+      $_HTML.='</label>';
+      $_HTML.='<label class="btn btn-outline-primary btn-sm">';
+      $_HTML.='<input type="radio" name="options" id="opt_'.$cRow.'_'.$cCol.'" autocomplete="off" value="6">6';
+      $_HTML.='</label>';
+      $_HTML.='<label class="btn btn-outline-primary btn-sm">';
+      $_HTML.='<input type="radio" name="options" id="opt_'.$cRow.'_'.$cCol.'" autocomplete="off" value="5">5';
+      $_HTML.='</label>';
+      $_HTML.='<label class="btn btn-outline-primary btn-sm">';
+      $_HTML.='<input type="radio" name="options" id="opt_'.$cRow.'_'.$cCol.'" autocomplete="off" value="4">4';
+      $_HTML.='</label>';
+      $_HTML.='<label class="btn btn-outline-primary btn-sm">';
+      $_HTML.='<input type="radio" name="options" id="opt_'.$cRow.'_'.$cCol.'" autocomplete="off" value="3">3';
+      $_HTML.='</label>';
+      $_HTML.='<label class="btn btn-outline-primary btn-sm">';
+      $_HTML.='<input type="radio" name="options" id="opt_'.$cRow.'_'.$cCol.'" autocomplete="off" value="2">2';
+      $_HTML.='</label>';
+      $_HTML.='<label class="btn btn-outline-primary btn-sm">';
+      $_HTML.='<input type="radio" name="options" id="opt_'.$cRow.'_'.$cCol.'" autocomplete="off" value="1">1';
+      $_HTML.='</label>';
+      $_HTML.='<label class="btn btn-outline-primary btn-sm">';
+      $_HTML.='<input type="radio" name="options" id="opt_'.$cCol.'_'.$cRow.'" autocomplete="off" value="2">2';
+      $_HTML.='</label>';
+      $_HTML.='<label class="btn btn-outline-primary btn-sm">';
+      $_HTML.='<input type="radio" name="options" id="opt_'.$cCol.'_'.$cRow.'" autocomplete="off" value="3">3';
+      $_HTML.='</label>';
+      $_HTML.='<label class="btn btn-outline-primary btn-sm">';
+      $_HTML.='<input type="radio" name="options" id="opt_'.$cCol.'_'.$cRow.'" autocomplete="off" value="4">4';
+      $_HTML.='</label>';
+      $_HTML.='<label class="btn btn-outline-primary btn-sm">';
+      $_HTML.='<input type="radio" name="options" id="opt_'.$cCol.'_'.$cRow.'" autocomplete="off" value="5">5';
+      $_HTML.='</label>';
+      $_HTML.='<label class="btn btn-outline-primary btn-sm">';
+      $_HTML.='<input type="radio" name="options" id="opt_'.$cCol.'_'.$cRow.'" autocomplete="off" value="6">6';
+      $_HTML.='</label>';
+      $_HTML.='<label class="btn btn-outline-primary btn-sm">';
+      $_HTML.='<input type="radio" name="options" id="opt_'.$cCol.'_'.$cRow.'" autocomplete="off" value="7">7';
+      $_HTML.='</label>';
+      $_HTML.='<label class="btn btn-outline-primary btn-sm">';
+      $_HTML.='<input type="radio" name="options" id="opt_'.$cCol.'_'.$cRow.'" autocomplete="off" value="8">8';
+      $_HTML.='</label>';
+      $_HTML.='<label class="btn btn-outline-primary btn-sm">';
+      $_HTML.='<input type="radio" name="options" id="opt_'.$cCol.'_'.$cRow.'" autocomplete="off" value="9">9';
+      $_HTML.='</label>';
+      $_HTML.='</div>';
+      return $_HTML;
+   }
+}

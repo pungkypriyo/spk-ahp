@@ -5,3 +5,4 @@
 <link rel="stylesheet" href="<?=base_url();?>vendors/selectFX/css/cs-skin-elastic.css">
 <link rel="stylesheet" href="<?=base_url();?>vendors/jqvmap/dist/jqvmap.min.css">
 <link rel="stylesheet" href="<?=base_url();?>vendors/datatables.net-bs4/css/dataTables.bootstrap4.min.css">
+<link rel="stylesheet" href="<?=base_url();?>vendors/datatables.net-bs4/css/select.dataTables.bootstrap4.min.css">

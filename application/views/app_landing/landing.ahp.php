@@ -28,9 +28,7 @@
                            <th>Pilih</th>
                         </tr>
                      </thead>
-                     <tbody>
-                     
-                     </tbody>
+                     <tbody></tbody>
                   </table>
                   <a href="<?=site_url('Landing/Ahp2');?>" class="btn btn-success"><i class="ti-angle-right"></i>&nbsp; Selanjutnya</a>
                </div>

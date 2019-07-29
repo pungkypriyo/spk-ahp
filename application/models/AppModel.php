@@ -26,6 +26,21 @@ class AppModel extends CI_Model {
         return $data->row();
      }
    }
+   
+   function _GetTableRow($table, $where=null){
+     if (!empty($where) || $where!=null){
+        $this->db->where($where);
+     }
+     $this->db->from($table);
+     $data = $this->db->get();
+     $count = $data->num_rows();
+
+     if ($count > 0) {
+        return false;
+     } else {
+        return $data->result();
+     }
+   }
 
 
    

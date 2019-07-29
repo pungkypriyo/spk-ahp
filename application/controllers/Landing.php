@@ -38,15 +38,6 @@ class Landing extends CI_Controller {
          $data[]= $row;
       }
 
-      // Set output
-      // $output = array(
-      //          "recordsTotal" => $this->Mod->count_all(),
-      //          "recordsFiltered" => $this->Mod->count_filtered(),
-      //          "data" => $data,
-      // );
-
-      // Output to json
-      //header('Content-Type: application/json');
       return $data;
    }
 
@@ -168,7 +159,7 @@ class Landing extends CI_Controller {
    public function Ahp(){
       $data['ListKain'] = $this->KMod->getdata();
       $data['LoadScripts'] = _LoadJS( array('landing/ahp') );
-      $data['_Breadcrumb'] = _Breadcrumb(array(1=>'Landing',2=>'Pilih Motif Kain'));
+      $data['_Breadcrumb'] = _Breadcrumb(array(1=>'Landing',2=>'Compare Motif Kain'));
 		$this->template->DisplayView('landing','app_landing/landing.ahp',$data);
    }
 
