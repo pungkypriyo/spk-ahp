@@ -1197,10 +1197,10 @@ class Compare extends CoreLanding {
       $HTML.= '<th>Rangking</th>';
       $HTML.= '</tr>';
       
-      $maxRank = round(max($ListRank[0]),2);
       foreach ($ListKeputusan as $ckey => $arrKep) {
+         $Rank = max($ListRank);
+         $maxRank = round($Rank[0],2);
          $max = round($arrKep['Rank'],2);
-         // $Mark = $maxRank. '-' .$max;
          $Mark = ($maxRank != $max) ? "" : "bg-primary text-white";
          $HTML.= '<tr  class="'.$Mark.'">';
          $HTML.= '<td>'.$this->GetNamaKain($arrKep['KainId']).'</td>';
