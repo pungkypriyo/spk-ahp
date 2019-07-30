@@ -161,7 +161,7 @@ class Compare extends CoreLanding {
       $data['TableKeputusan'] = $this->TableKeputusanBuild($token);
 
       $data['_Breadcrumb'] = _Breadcrumb(array(1=>'Compare',2=>'Hasil Keputusan'));
-      $data['LoadScripts'] = _LoadJS(array('landing/compare.ahp_result'));
+      $data['LoadScripts'] = _LoadJS(array('printPreview','landing/compare.ahp_result'));
 		$this->template->DisplayView('landing','app_landing/compare.'.__FUNCTION__,$data);
    }
 
@@ -396,7 +396,7 @@ class Compare extends CoreLanding {
       
       $HTML= '';
       $HTML.= '<tr>';
-      $HTML.='<td style="font-size:14px">Jumlah</td>';
+      $HTML.='<td style="font-size:14px"><b>Jumlah</b></td>';
       $cData = array();
       foreach ($row['parent'] as $cRow => $cVal) {
          $cData[] = $row['item'][$cRow];   
@@ -409,10 +409,15 @@ class Compare extends CoreLanding {
             $sum[$sub_key]+=$value;
          }
       }
+
       foreach ($sum as $key => $value) {
          // $HTML.='<td><input class="form-control-sm form-control input-sm" type="text" id="inTextTotalK-'.$token.'" disabled="disabled" value="'.$sum[$key].'"></td>';            
          $HTML.='<td>'.$sum[$key].'</td>';            
       }
+      $HTML.='<td colspan="2"><b>Jumlah (Hk/Pv)</b></td>';            
+      // $HTML.='<td></td>';       
+      $HkPv = $this->get_row_content_data($token);
+      $HTML.='<td> <b>'.round($HkPv,2).'</b></td>';            
       // var_dump($sum);
       
       $HTML.= '</tr>';
@@ -585,42 +590,46 @@ class Compare extends CoreLanding {
       // $cKriteria = $this->App->_GetTableData('data_kriteria',array('id_kriteria' => $id_kriteria));
 
       $HTML_HEADER = $this->get_row_header_calc($token);
+      $DATA_CONTENT = $this->get_row_content_data($token);
       $HTML_CONTENT = $this->get_row_content_calc($token);
       $HTML_PV_MATRIX_1 = $this->dataInputed($token);
-      // $HTML_PV_MATRIX_2 = $this->get_content_pv($token);
+      
       $HTML_PV_MATRIX_2 = array();
       foreach ($this->get_content_pv($token) as $key => $value) {
          $row = array();
          $row[] = $value;
          $HTML_PV_MATRIX_2[] = $row;
       }
-      // $HTML_CONTENT = $this->get_row_content($token);
       $HTML_TOTAL = $this->get_row_total($token);
 
-      // $HTML = '<div class="row pb-2"><div class="col-md-12"><h3>Tabel Normalisasi</h3></div></div>';
-      // $HTML = '<div class="row pb-2"><div class="col-md-12"><h3>Tabel Normalisasi "'.$cKriteria->nm_kriteria.'"</h3></div></div>';
       $HTML = '';
       $HTML.= '<table id="table-data" class="table table-striped table-bordered" style="text-align:center;">';
       $HTML.= $HTML_HEADER;
-      // $HTML.= json_encode($HTML_CONTENT);
       $HTML.= $HTML_CONTENT;
       $HTML.= $HTML_TOTAL;
-      // $HTML.= json_encode(sizeof($HTML_PV_MATRIX_1));
-      // $HTML.= json_encode($HTML_PV_MATRIX_1);
-      // $HTML.= json_encode(sizeof($HTML_PV_MATRIX_2));
-      // $HTML.= json_encode($HTML_PV_MATRIX_2);
-      // $HTML.= json_encode($this->perkalian_matriks($HTML_PV_MATRIX_1,array($HTML_PV_MATRIX_2)));
-      // $hasil = $this->perkalian_matriks($HTML_PV_MATRIX_1,$HTML_PV_MATRIX_2);
-      // $HTML.= json_encode($hasil);
-      // for ($i=0; $i<sizeof($hasil); $i++) {
-      //    $HTML.= "<tr>";
-      //    for ($j=0; $j<sizeof($hasil[$i]); $j++) {
-      //       $HTML.= "<td>".round($hasil[$i][$j],2) ."</td>";
-      //    }
-      //    $HTML.= "</tr>";
-      // }
-      // $HTML.= $HTML_TOTAL;
       $HTML.= '</table>';
+      $HTML.= '<br>';
+
+      $countKriteria = sizeof($this->Mod->get_kriteria_list());
+      $LamdaVal = round(($DATA_CONTENT / $countKriteria),2);
+      $CIVal = round(($LamdaVal-6) / ($countKriteria - 1),2);
+      $CRVal = round( ($CIVal / 1.24) ,2);
+
+      $HTML.= '<table id="table-data-" class="table table-striped table-bordered" style="text-align:center;">';
+      $HTML.= '<tr>';
+      $HTML.= '<th class="bg-primary text-white">Lamda</th>';
+      $HTML.= '<th class="bg-primary text-white">Konsistensi Index</th>';
+      $HTML.= '<th class="bg-primary text-white">Konsistensi Rasio</th>';
+      $HTML.= '</tr>';
+      $HTML.= '<tr>';
+      $HTML.= '<td><b>'.$LamdaVal.'</b></td>';
+      $HTML.= '<td><b>'.$CIVal.'</b></td>';
+      $HTML.= '<td><b>'.$CRVal.'</b></td>';
+      $HTML.= '</tr>';
+      $HTML.= '<tr></tr>';
+      $HTML.= '</table>';
+
+
       return $HTML;
    }
 
@@ -783,6 +792,113 @@ class Compare extends CoreLanding {
       }
       return $HTML;
    }
+   
+   function get_row_content_data($token){
+      $cList = $this->Mod->get_bobot_by_user_acuan_token($token);
+      $row = array();
+      foreach ($cList as $key) {
+         $row['item'][$key->id_kriteria][$key->id_kriteria_to] = $key->nilai_acuan;
+         $row['parent'][$key->id_kriteria] = $key->nm_kriteria;
+      }
+      
+      
+      $HTML= '';
+      $cDivision = $this->get_total($token);   
+      $pvDiv = $this->get_pv_division_calc($this->get_content_calc($token));
+      // $matrix = array();
+      $perkalian = $this->get_row_hasil_kali($token);
+      $i = 0;
+      $HkPv = array();
+      foreach ($row['parent'] as $cRow => $cVal) {
+         $j = 0;
+         
+         $HTML.= '<tr>';
+         $HTML.='<th style="font-size:14px">'.$cVal.'</th>';
+         $cData = array();
+         $cDataSum = array();
+         foreach ($row['item'] as $cItemKey => $cItemVal) {
+            $cData[] = $row['item'][$cRow][$cItemKey];
+            $cDataSum[] = $row['item'][$cRow][$cItemKey] / $cDivision[$cItemKey];
+            $HTML.='<td>'.$row['item'][$cRow][$cItemKey].'</td>';
+         }
+         
+         $Pv = array_sum($cDataSum) / $pvDiv ;
+         
+         $HTML.='<td>'.round($Pv,2).'</td>';            
+         $HTML.='<td>'.round($perkalian[$i][$j],2).'</td>';            
+         $HTML.='<td>'.round($perkalian[$i][$j] / $Pv,2).'</td>';            
+         $HkPv[] = $perkalian[$i][$j] / $Pv;            
+         // $HTML.='<td>'.sizeof($row['parent']).'</td>';            
+         
+         // $Kali = $this->get_row_hasil_kali($token);
+         // $HTML.=$Kali;            
+         // $HTML.='<td><input class="form-control-sm form-control input-sm" type="text" id="RowPv'.$token.'" name="RowNormTotal[]" value="'.$Pv.'" disabled="disabled"></td>';            
+         
+         
+         
+         $HTML.='</tr>';
+         
+         $i++;
+         $j++;
+      }
+      $HkPvSum = array_sum($HkPv);
+      return $HkPvSum;
+      // return $HTML;
+   }
+
+  /*  function get_row_content_pv_data($token){
+      $cList = $this->Mod->get_bobot_by_user_acuan_token($token);
+      $row = array();
+      foreach ($cList as $key) {
+         $row['item'][$key->id_kriteria][$key->id_kriteria_to] = $key->nilai_acuan;
+         $row['parent'][$key->id_kriteria] = $key->nm_kriteria;
+      }
+      
+      
+      $HTML= '';
+      $cDivision = $this->get_total($token);   
+      $pvDiv = $this->get_pv_division_calc($this->get_content_calc($token));
+      // $matrix = array();
+      $perkalian = $this->get_row_hasil_kali($token);
+      $i = 0;
+      $HkPv = array();
+      foreach ($row['parent'] as $cRow => $cVal) {
+         $j = 0;
+         
+         $HTML.= '<tr>';
+         $HTML.='<th style="font-size:14px">'.$cVal.'</th>';
+         $cData = array();
+         $cDataSum = array();
+         foreach ($row['item'] as $cItemKey => $cItemVal) {
+            $cData[] = $row['item'][$cRow][$cItemKey];
+            $cDataSum[] = $row['item'][$cRow][$cItemKey] / $cDivision[$cItemKey];
+            $HTML.='<td>'.$row['item'][$cRow][$cItemKey].'</td>';
+         }
+         
+         $Pv = array_sum($cDataSum) / $pvDiv ;
+         
+         $HTML.='<td>'.round($Pv,2).'</td>';            
+         $HTML.='<td>'.round($perkalian[$i][$j],2).'</td>';            
+         $HTML.='<td>'.round($perkalian[$i][$j] / $Pv,2).'</td>';            
+         $HkPv[] = $Pv;            
+         // $HTML.='<td>'.sizeof($row['parent']).'</td>';            
+         
+         // $Kali = $this->get_row_hasil_kali($token);
+         // $HTML.=$Kali;            
+         // $HTML.='<td><input class="form-control-sm form-control input-sm" type="text" id="RowPv'.$token.'" name="RowNormTotal[]" value="'.$Pv.'" disabled="disabled"></td>';            
+         
+         
+         
+         $HTML.='</tr>';
+         
+         $i++;
+         $j++;
+      }
+      // $HkPvSum = $HkPv);
+      // return $HkPvSum;
+      return $HkPv;
+      // return $HTML;
+   } */
 
    // Calculate Normalisasi
    // Menampilkan tabel nomalisasi
@@ -1031,15 +1147,19 @@ class Compare extends CoreLanding {
       /* CONTENT */
       $ContentList = $this->get_content_normalisasi($token);
       $HTML_HEADER_COL = '';
+      $PV_BY_KAIN = array();
       for ($i=0; $i < sizeof($dataKain) ; $i++) { 
          $HTML_HEADER_COL .='<tr>';
          $HTML_HEADER_COL .='<td>'.$this->GetNamaKain($dataKain[$i]).'</td>';
+         $rowPV = array();
          for ($j=0; $j < sizeof($PVList[$dataKain[$i]]) ; $j++) { 
             $HTML_HEADER_COL .='<td>'.$PVList[$dataKain[$i]][$j]['PVal'].'</td>';
+            $rowPV[] = $PVList[$dataKain[$i]][$j]['PVal'];
+            // $PV_BY_KAIN[] = $rowPV;
          }
+         $PV_BY_KAIN[] = $rowPV;
          $HTML_HEADER_COL .='</tr>';
-      }
-      // $ItemList = $dataList;
+      }      
 
 
       $HTML_TOTAL = $this->get_row_total($token);
@@ -1048,16 +1168,48 @@ class Compare extends CoreLanding {
       $HTML.= '<table id="table-data" class="table table-striped table-bordered" style="text-align:center;">';
       $HTML.= $HTML_HEADER;
       $HTML.= $HTML_HEADER_COL;
-      // $HTML.= $HTML_CONTENT;
-      // $HTML.= $HTML_TOTAL;
+
+      /* MATRIX 2 */
+      $PV_ACUAN = array();
+      foreach ($this->get_content_pv($token) as $key => $value) {
+         $row = array();
+         $row[] = $value;
+         $PV_ACUAN[] = $row;
+      }
+
+      $hasil = $this->perkalian_matriks($PV_BY_KAIN,$PV_ACUAN);
+
+      $ListKeputusan = array();
+      $ListRank = array();
+      for ($i=0; $i < sizeof($dataKain) ; $i++) { 
+         for ($j=0; $j < sizeof($hasil[$i]) ; $j++) { 
+            $ListKeputusan[] = array('KainId' => $dataKain[$i],'Rank' => $hasil[$i][$j]);
+         }
+         $ListRank[] = $hasil[$i];
+      }
+
+      $HTML.= '</table>';
+      $HTML.= '<br>';
+      $HTML.= '<h3>Hasil Keputusan</h3><br>';
+      $HTML.= '<table id="table-data" class="table table-striped table-bordered" style="text-align:center;">';
+      $HTML.= '<tr>';
+      $HTML.= '<th>Nama Kain</th>';
+      $HTML.= '<th>Rangking</th>';
+      $HTML.= '</tr>';
+      
+      $maxRank = round(max($ListRank[0]),2);
+      foreach ($ListKeputusan as $ckey => $arrKep) {
+         $max = round($arrKep['Rank'],2);
+         // $Mark = $maxRank. '-' .$max;
+         $Mark = ($maxRank != $max) ? "" : "bg-primary text-white";
+         $HTML.= '<tr  class="'.$Mark.'">';
+         $HTML.= '<td>'.$this->GetNamaKain($arrKep['KainId']).'</td>';
+         $HTML.= '<td>'.round($arrKep['Rank'],2).'</td>';
+         $HTML.= '</tr>';
+      }
+
       $HTML.= '</table>';
       return $HTML;
-      // return json_encode($dataList);
-      // return json_encode(sizeof($dataList));
-      // return json_encode(sizeof($dataKain));
-      // return json_encode($Kain);
-      return json_encode(sizeof($PVList));
-      // return json_encode($PVList);
    }
 
    function GetNamaKain($id){
