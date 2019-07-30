@@ -15,6 +15,7 @@
                <form action="<?=site_url('kain/add');?>" method="post" enctype="multipart/form-data" class="form-horizontal">
                   <div class="row form-group">
                      <div class="col col-md-2"><label for="id_kain" class=" form-control-label">ID Motif</label></div>
+                     <div class="col-2 col-md-1 pt-2 text-right">FAM - </div>
                      <div class="col-12 col-md-3">
                         <input type="text" id="id_kain" name="id_kain" class="form-control" readonly>
                      </div>

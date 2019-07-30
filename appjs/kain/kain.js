@@ -16,7 +16,12 @@
          "dataType": 'json'
       },
       "columns": [
-         { "data": ['id'] },
+         { 
+            "data": ['id'],
+            "render" : function(d){
+               return renderId(d);
+            }
+         },
          { "data": ['nama'] },
          { "data": ['jenis'] },
          { "data": ['tipe'] },
@@ -46,6 +51,11 @@
          "sInfo": "<b> _END_ </b> dari Total _TOTAL_ data"
       }
    });
+
+   var renderId = function(d){
+      var data = "FAM-" + d;
+      return data;
+   }
 
    /* Button Action */
    var btnTambah = $('button#btn-add');

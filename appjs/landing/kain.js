@@ -15,7 +15,12 @@
          "dataType": 'json'
       },
       "columns": [
-         { "data": ['id'] },
+         { 
+            "data": ['id'],
+            "render": function(d){
+               return "FAM-" + d;
+            }
+         },
          { "data": ['nama'] },
          { "data": ['jenis'] },
          { "data": ['tipe'] },

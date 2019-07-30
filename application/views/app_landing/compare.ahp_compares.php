@@ -6,7 +6,7 @@
          <div class="col-lg-4 col-md-6">
             <div class="card">
                   <div class="card-header">
-                     ID : <?=$row->id_kain;?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                     ID : FAM-<?=$row->id_kain;?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                      <strong class="card-title mb-3"><?=$row->nm_kain;?></strong>
                   </div>
                   <div class="card-body">

@@ -21,13 +21,16 @@
                   <input type="hidden" id="idk" name="idk" value="<?=$Kain->idk;?>">
                   <div class="row form-group">
                      <div class="col col-md-2"><label for="id_kain" class=" form-control-label">ID Motif</label></div>
+                     <div class="col-2 col-md-1 pt-2 text-right">FAM - </div>
                      <div class="col-12 col-md-3">
                         <input type="text" id="id_kain" name="id_kain" class="form-control" value="<?=$Kain->id_kain;?>" readonly>
                      </div>
                   </div>
                   <div class="row form-group">
-                     <div class="col col-md-2"><label for="nm_kain" class=" form-control-label">Nama Motif</label></div>
-                     <div class="col-12 col-md-9"><input type="text" id="nm_kain" name="nm_kain" value="<?=$Kain->nm_kain;?>" class="form-control"></div>
+                     <div class="col col-md-2">
+                        <label for="nm_kain" class=" form-control-label">Nama Motif</label></div>
+                     <div class="col-10 col-md-9">
+                        <input type="text" id="nm_kain" name="nm_kain" value="<?=$Kain->nm_kain;?>" class="form-control"></div>
                   </div>
                   <div class="row form-group">
                      <div class="col col-md-2"><label for="jenis_bahan" class=" form-control-label">Jenis Bahan</label></div>
