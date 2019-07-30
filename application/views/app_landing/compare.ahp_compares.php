@@ -11,7 +11,7 @@
                   </div>
                   <div class="card-body">
                      <div class="mx-auto d-block">
-                        <img class="card-img-top rounded-circle" src="https://spk-ahp.dev/images/kain/<?=$row->gambar;?>" alt="<?=$row->nm_kain;?>" width="150px" height="150px">
+                        <img class="card-img-top rounded-circle" src="<?=base_url('images/kain/'.$row->gambar;?>" alt="<?=$row->nm_kain;?>" width="150px" height="150px">
                      </div>
                   </div>
             </div>
